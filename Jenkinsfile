@@ -11,7 +11,7 @@ pipeline {
         }
         
         environment {
-        SONAR_TOKEN = credentials('53b579046bbf95c5f94c927af53557f544e262f9') // Fetch the SonarQube token from Jenkins credentials
+        SONAR_TOKEN = credentials('sqp_2b07b21f0b91ef66a6ebdd8d54110820a07cd03c') // Fetch the SonarQube token from Jenkins credentials
         }
         stage('SonarQube Analysis') {
             steps {
@@ -22,7 +22,7 @@ pipeline {
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.projectKey=WebServer \
                         -Dsonar.sources=./index.html \  # Specify the file/folder you want to analyze
-                        -Dsonar.token=${53b579046bbf95c5f94c927af53557f544e262f9}
+                        -Dsonar.token=${sqp_2b07b21f0b91ef66a6ebdd8d54110820a07cd03c}
                     """
                 }
             }
