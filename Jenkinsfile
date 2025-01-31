@@ -1,12 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('SCM') {
             steps {
-                script {
-                    git 'https://github.com/SnehaKalsait/Project-Sunbeam.git'
-                    sh 'docker build -t mywebsite .'
-                }
+                git branch: 'main', url: 'https://github.com/SnehaKalsait/Project-Sunbeam.git'
             }
         }
         
