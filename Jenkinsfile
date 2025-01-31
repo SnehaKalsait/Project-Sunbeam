@@ -19,7 +19,7 @@ pipeline {
                     /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScanner/bin/sonar-scanner \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.projectKey=WebServer \
-                        -Dsonar.sources=./index.html \  # Specify the file/folder you want to analyze
+                        -Dsonar.sources=./index.html   # Specify the file/folder you want to analyze
                         -Dsonar.token=${sqp_3916f89f21d6de81968f32a793c0d851479933ef}
                     """
                 }
