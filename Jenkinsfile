@@ -27,6 +27,12 @@ pipeline {
                 }
             }
         }
+
+        stage('Run SSH Command') {
+            steps {
+                sshCommand remote: [host: '13.233.199.84', user: 'ubuntu', credentialsId: 'Ec2-SSH'], command: 'echo "Hello from Jenkins" && hostname'
+            }
+        }
         
     }
 }
