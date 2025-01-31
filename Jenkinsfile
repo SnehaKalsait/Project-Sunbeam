@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/SnehaKalsait/Project-Sunbeam.git'
+                git 'https://github.com/SnehaKalsait/Project-Sunbeam.git'
                 sh 'docker build -t mywebsite .'
             }
         }
