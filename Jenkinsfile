@@ -21,7 +21,7 @@ pipeline {
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.projectKey=WebServer \
                         -Dsonar.sources=./index.html \
-                        -Dsonar.token=${sqp_3916f89f21d6de81968f32a793c0d851479933ef}
+                        -Dsonar.token=${SONAR_TOKEN}
                     """
                 }
             }
