@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        SONAR_TOKEN = credentials('sqp_3916f89f21d6de81968f32a793c0d851479933ef') // SonarQube token from Jenkins credentials
+    }
+
     stages {
         stage('SCM') {
             steps {
@@ -7,20 +12,16 @@ pipeline {
                 sh 'docker build -t mywebsite .'
             }
         }
-        
-        environment {
-        SONAR_TOKEN = credentials('sqp_3916f89f21d6de81968f32a793c0d851479933ef') // Fetch the SonarQube token from Jenkins credentials
-        }
+
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // Run SonarQube Scanner
                     sh """
                     /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScanner/bin/sonar-scanner \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.projectKey=WebServer \
-                        -Dsonar.sources=./index.html \  # Specify the file/folder you want to analyze
-                        -Dsonar.token=${sqp_3916f89f21d6de81968f32a793c0d851479933ef}
+                        -Dsonar.sources=./index.html \
+                        -Dsonar.token=$SONAR_TOKEN
                     """
                 }
             }
@@ -31,6 +32,5 @@ pipeline {
                 sshCommand remote: [host: '13.233.199.84', user: 'ubuntu', credentialsId: 'Ec2-SSH'], command: 'echo "Hello from Jenkins" && hostname'
             }
         }
-        
     }
 }
