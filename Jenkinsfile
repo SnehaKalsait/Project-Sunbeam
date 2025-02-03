@@ -34,8 +34,8 @@ pipeline {
                 sshCommand remote: [
                     name: 'EC2-Server',      
                     host: '3.109.122.212',
-                    user: 'ubuntu',
-                    credentialsId: 'Ec2-SSH'
+                    user: 'EC2-SSH',
+                    credentialsId: '3.109.122.212'
                 ], command: 'echo "Hello from Jenkins" && hostname'
             }
         }
