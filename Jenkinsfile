@@ -35,7 +35,7 @@ pipeline {
                     name: 'EC2-Server',      
                     host: '3.109.122.212',
                     user: 'ubuntu',
-                    credentialsId: 'EC2-SSH',
+                    credentialsId: 'Project',
                     allowAnyHosts: true
                 ], command: 'echo "Hello from Jenkins" && hostname'
             }
