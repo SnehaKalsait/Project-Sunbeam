@@ -31,15 +31,13 @@ pipeline {
         
         stage('Run SSH Command') {
             steps {
-                script {
-                    sshCommand remote: [
-                        host: '3.109.122.212',
-                        user: 'ubuntu',
-                        credentialsId: 'Ec2-SSH'
-                    ], command: 'echo "Hello from Jenkins" && hostname'
-                }
+                sshCommand remote: [
+                    name: 'EC2-Server',      
+                    host: '3.109.122.212',
+                    user: 'ubuntu',
+                    credentialsId: 'Ec2-SSH'
+                ], command: 'echo "Hello from Jenkins" && hostname'
             }
         }
-
     }
 }
