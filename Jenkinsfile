@@ -32,7 +32,7 @@ pipeline {
         stage('Run SSH Command') {
             steps {
                 sshagent(['Project']) {
-                    sh 'ssh ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"'
+                    sh 'ssh -i /home/sneha/Downloads/Project.pem ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"'
                 }
             }
         }
