@@ -53,15 +53,14 @@ pipeline {
             steps {
                 sshagent(['Project']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"
-                        docker stop website1
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212
-                        docker pull snehakalsait/webserver:latest
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212
-                        docker rm website1
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212
-                        docker run -d --name website1 -p 80:80 snehakalsait/webserver:latest
-                    """
+                ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212 "
+                    echo 'Hello from Jenkins' && hostname
+                    docker stop website1
+                    docker pull snehakalsait/webserver:latest
+                    docker rm website1
+                    docker run -d --name website1 -p 80:80 snehakalsait/webserver:latest
+                "
+                """
                 }
             }
         }
