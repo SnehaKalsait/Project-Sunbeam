@@ -3,16 +3,17 @@ pipeline {
 
     environment {
         SONAR_TOKEN = credentials('WebServer-Sonar') // Fetch the SonarQube token from Jenkins credentials
+        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB')
+        
     }
 
     stages {
         stage('SCM') {
             steps {
                 git branch: 'main', url: 'https://github.com/SnehaKalsait/Project-Sunbeam.git'
-                sh 'docker build -t mywebsite .'
             }
         }
-
+        
          stage('SonarQube Analysis') {
             steps {
                 script {
@@ -28,12 +29,35 @@ pipeline {
                 }
             }
         }
+
+        
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t snehakalsait/webserver .'
+            }
+        }
+
+        stage('Dockerhub Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Push to Dockerhub') {
+            steps {
+                sh 'docker push snehakalsait/webserver'
+            }
+        }
         
         stage('Run SSH Command') {
             steps {
                 sshagent(['Project']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"
+                        docker stop website1 || true
+                        docker pull snehakalsait/webserver:latest
+                        docker rm website1 || true
+                        docker run -d --name website1 -p 80:80 snehakalsait/webserver:latest
                     """
                 }
             }
