@@ -31,13 +31,9 @@ pipeline {
         
         stage('Run SSH Command') {
             steps {
-                sshCommand remote: [
-                    name: 'EC2-Server',      
-                    host: '3.109.122.212',
-                    user: 'ubuntu',
-                    credentialsId: 'Project',
-                    allowAnyHosts: true
-                ], command: 'echo "Hello from Jenkins" && hostname'
+                sshagent(['Project']) {
+                    sh 'ssh ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"'
+                }
             }
         }
     }
