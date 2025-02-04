@@ -32,7 +32,9 @@ pipeline {
         stage('Run SSH Command') {
             steps {
                 sshagent(['Project']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"'
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ubuntu@3.109.122.212 "echo \'Hello from Jenkins\' && hostname"
+                    """
                 }
             }
         }
