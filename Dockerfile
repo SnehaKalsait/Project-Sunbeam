@@ -1,3 +1,3 @@
 FROM nginx:latest
-COPY index.html D:\Project-Git\index.html
+COPY index.html /usr/share/nginx/html/
 EXPOSE 80
