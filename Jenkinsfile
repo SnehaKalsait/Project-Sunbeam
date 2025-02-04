@@ -57,7 +57,7 @@ pipeline {
                         docker stop website1 || true
                         docker pull snehakalsait/webserver:latest
                         docker rm website1 || true
-                        docker run -d --name website1 -p 80:80 snehakalsait/webserver:latest
+                        docker run -d --name website1 -p 8000:80 snehakalsait/webserver:latest
                     """
                 }
             }
