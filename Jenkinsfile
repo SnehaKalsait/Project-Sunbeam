@@ -1,14 +1,14 @@
 pipeline {
     agent any
 
+    tools {
+        sonar 'SonarQube Scanner'  // Use the correct tool name configured in Jenkins
+    }
+
     environment {
         SONAR_TOKEN = credentials('Sonar') // Fetch the SonarQube token from Jenkins credentials
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB')
         
-    }
-
-    tools {
-        sonarScanner 'SonarQube Scanner'  // Name of the SonarQube Scanner tool configured in Jenkins
     }
 
     stages {
