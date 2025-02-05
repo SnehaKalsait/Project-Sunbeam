@@ -17,11 +17,13 @@ pipeline {
     stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') {
+                    withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
                         sh """
-                            sonar-scanner \
-                                -Dsonar.projectKey=WebServer \
-                                -Dsonar.sources=./index.html
+                        sonar-scanner \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.projectKey=WebServer \
+                            -Dsonar.sources=./index.html \
+                            -Dsonar.token=${SONAR_TOKEN}
                         """
                     }
                 }
