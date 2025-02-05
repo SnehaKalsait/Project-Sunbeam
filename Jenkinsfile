@@ -14,22 +14,22 @@ pipeline {
             }
         }
         
-     stage('SonarQube Analysis') {
-    steps {
-        script {
-            withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
-                sh """
-                    export PATH=$PATH:/opt/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin
-                    sonar-scanner \
-                      -Dsonar.host.url=http://localhost:9000 \
-                      -Dsonar.projectKey=WebServer \
-                      -Dsonar.sources=./index.html \
-                      -Dsonar.token=${SONAR_TOKEN}
-                """
-            }
-        }
-    }
-}
+    // stage('SonarQube Analysis') {
+    //steps {
+      //  script {
+        //    withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
+          //      sh """
+            //        export PATH=$PATH:/opt/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin
+              //      sonar-scanner \
+                //      -Dsonar.host.url=http://localhost:9000 \
+                  //    -Dsonar.projectKey=WebServer \
+                    //  -Dsonar.sources=./index.html \
+                      // -Dsonar.token=${SONAR_TOKEN}
+                //"""
+            // }
+        // }
+    // }
+// }
 
 
         
