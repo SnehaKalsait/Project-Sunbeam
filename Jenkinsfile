@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN = credentials('Sonar') // Fetch the SonarQube token from Jenkins credentials
+       // SONAR_TOKEN = credentials('Sonar') // Fetch the SonarQube token from Jenkins credentials
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB')
         
     }
