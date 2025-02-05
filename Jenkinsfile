@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarScanner 'WebServer'  // Use the correct tool name configured in Jenkins
+        SonarScanner 'WebServer'  // Use the correct tool name configured in Jenkins
     }
 
     environment {
