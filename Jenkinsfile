@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarScanner 'SonarQube Scanner'  // Use the correct tool name configured in Jenkins
+        sonar 'Sonar'  // Use the correct tool name configured in Jenkins
     }
 
     environment {
