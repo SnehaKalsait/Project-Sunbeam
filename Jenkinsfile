@@ -15,19 +15,19 @@ pipeline {
         }
         
      stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Use SONAR_TOKEN directly from environment
-                    sh """
-                        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScanner/bin/sonar-scanner \
-                          -Dsonar.host.url=http://localhost:9000 \
-                          -Dsonar.projectKey=WebServer \
-                          -Dsonar.sources=./index.html \
-                          -Dsonar.token=${SONAR_TOKEN}
-                    """
-                }
+        steps {
+            script {
+                 // Use SONAR_TOKEN directly from environment
+                sh """
+                    sonar-scanner \
+                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.projectKey=WebServer \
+                        -Dsonar.sources=./index.html \
+                        -Dsonar.token=${SONAR_TOKEN}
+                """
             }
         }
+    }
 
         
         stage('Build Docker Image') {
