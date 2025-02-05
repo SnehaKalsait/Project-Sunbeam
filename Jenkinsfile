@@ -7,6 +7,10 @@ pipeline {
         
     }
 
+    tools {
+        sonarScanner 'SonarQube Scanner'  // Name of the SonarQube Scanner tool configured in Jenkins
+    }
+
     stages {
         stage('SCM') {
             steps {
@@ -14,22 +18,22 @@ pipeline {
             }
         }
         
-    stage('SonarQube Analysis') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
-                        sh """
-                        sonar-scanner \
-                            -Dsonar.host.url=http://localhost:9000 \
-                            -Dsonar.projectKey=WebServer \
-                            -Dsonar.sources=./index.html \
-                            -Dsonar.token=${SONAR_TOKEN}
-                        """
+           stage('SonarQube Analysis') {
+                steps {
+                    script {
+                        withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
+                            sh """
+                            export SONAR_TOKEN=${SONAR_TOKEN} && \
+                            sonar-scanner \
+                                -Dsonar.host.url=http://localhost:9000 \
+                                -Dsonar.projectKey=WebServer \
+                                -Dsonar.sources=./index.html \
+                                -Dsonar.token=${SONAR_TOKEN}
+                            """
+                        }
                     }
                 }
             }
-        }
-
 
 
         
