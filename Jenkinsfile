@@ -17,19 +17,16 @@ pipeline {
     stage('SonarQube Analysis') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
+                    withSonarQubeEnv('SonarQube') {
                         sh """
-                        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScanner/bin/sonar-scanner \
-                            -Dsonar.host.url=http://localhost:9000 \
-                            -Dsonar.projectKey=WebServer \
-                            -Dsonar.sources=./index.html \
-                            -Dsonar.token=${SONAR_TOKEN}
+                            sonar-scanner \
+                                -Dsonar.projectKey=WebServer \
+                                -Dsonar.sources=./index.html
                         """
                     }
                 }
             }
         }
-
 
 
 
