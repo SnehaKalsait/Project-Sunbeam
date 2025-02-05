@@ -1,12 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        SonarScanner 'WebServer'  // Use the correct tool name configured in Jenkins
-    }
-
     environment {
-        SONAR_TOKEN = credentials('Sonar') // Fetch the SonarQube token from Jenkins credentials
+        SONAR_TOKEN = credentials('WebServer-Sonar') // Fetch the SonarQube token from Jenkins credentials
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB')
         
     }
@@ -18,23 +14,21 @@ pipeline {
             }
         }
         
-           stage('SonarQube Analysis') {
-                steps {
-                    script {
-                        withCredentials([string(credentialsId: 'Sonar', variable: 'SONAR_TOKEN')]) {
-                            sh """
-                            export SONAR_TOKEN=${SONAR_TOKEN} && \
-                            sonar-scanner \
-                                -Dsonar.host.url=http://localhost:9000 \
-                                -Dsonar.projectKey=WebServer \
-                                -Dsonar.sources=./index.html \
-                                -Dsonar.token=${SONAR_TOKEN}
-                            """
-                        }
+         stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'WebServer-Sonar', variable: 'SONAR_TOKEN')]) {
+                        sh """
+                        /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScanner/bin/sonar-scanner \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.projectKey=WebServer \
+                            -Dsonar.sources=./index.html \
+                            -Dsonar.token=${SONAR_TOKEN}
+                        """
                     }
                 }
             }
-
+        }
 
         
         stage('Build Docker Image') {
