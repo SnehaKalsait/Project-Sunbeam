@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AWS Web Server Deployment with CI/CD, Prometheus Monitoring, and IDS Security</title>
+    <title>AWS Web Server Deployment with CI/CD, Prometheus Monitoring, and IPS Security using Snort</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -121,14 +121,13 @@
 
         <div class="project-description">
             <h2>Project Description</h2>
-            <p>This project implements an end-to-end automated solution for deploying a web application on AWS using modern DevOps practices. The solution is built on a multi-VM architecture.</p>
-            <p>This project focuses on:</p>
-            <ul>
-                <li>Implementing a Continuous Integration/Continuous Deployment (CI/CD) pipeline using Jenkins for automated software delivery.</li>
-                <li>Monitoring system metrics and performance with Prometheus.</li>
-                <li>Ensuring code quality through automated analysis (SonarQube).</li>
-                <li>Ensuring network security using an Intrusion Detection System (IDS).</li>
-            </ul>
+            <p>This project focuses on automating the deployment of a web server using a CI/CD pipeline while integrating real-time monitoring and intrusion prevention for enhanced security. The infrastructure is distributed across multiple virtual machines (VMs), each serving a dedicated role to ensure modularity, efficiency, and scalability.
+The deployment process is automated using Jenkins, with Git for version control and SonarQube for code quality analysis. Docker is utilized for containerized application deployment. Prometheus and Grafana are integrated for real-time monitoring and visualization, ensuring system health and performance tracking.
+For network security, Snort is deployed as an Intrusion Prevention System (IPS) to detect and actively block potential threats, ensuring a secure infrastructure.
+This project establishes a streamlined, secure, and continuously monitored web application deployment, optimizing both performance and security within a cloud-based environment.
+</p>
+            
+            
         </div>
 
         <section class="section">
